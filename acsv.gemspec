@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.summary     = 'Read CSV files without configuration'
   s.description = "A wrapper for Ruby's standard CSV class that auto-detects column separator and file encoding."
   s.homepage    = 'https://github.com/wvengen/ruby-acsv'
-  s.license     = 'MIT'
+  s.license     = 'GPL-3.0+'
 
   s.files       = Dir["lib/**/*"]
 
