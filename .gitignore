@@ -1,0 +1,7 @@
+.*.swp
+tags
+pkg
+*~
+*.rbc
+Gemfile.lock
+.ruby-version
