@@ -15,6 +15,7 @@ Gem::Specification.new do |s|
   s.files       = Dir["lib/**/*"]
 
   # test with different character detection libraries
+  s.add_development_dependency 'rake', '>= 7.5.0'
   s.add_development_dependency 'rspec', '~> 3.1.0'
   s.add_development_dependency 'charlock_holmes', '~> 0.7.3'
   s.add_development_dependency 'rchardet', '~> 1.4.2'
