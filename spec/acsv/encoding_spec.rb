@@ -13,9 +13,12 @@ describe ACSV::Detect do
       describe "using #{method}" do
 
         Dir.glob('spec/files/{test,extern}_*') do |file|
-          it "detects '#{file}' correctly" do
-            enc = ENCODINGS.select{|s,v| file.match /_#{s}[._]/}.first.last
-            expect(enc).to include ACSV::Detect.encoding(File.new(file), method: method)
+          describe 'detects' do
+            let(:enc) { ENCODINGS.select{|s,v| file.match /_#{s}[._]/}.first.last }
+
+            it "'#{file}' correctly" do
+              expect(enc).to include ACSV::Detect.encoding(File.new(file), method: method)
+            end
           end
         end
 

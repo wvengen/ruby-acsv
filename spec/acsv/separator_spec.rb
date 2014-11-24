@@ -11,9 +11,12 @@ describe ACSV::Detect do
     }
 
     Dir.glob('spec/files/{test,extern}_*') do |file|
-      it "detects '#{file}' correctly" do
-        sep = SEPARATORS.select{|s,v| file.match /_#{s}[._]/}.first.last
-        expect(ACSV::Detect.separator(File.new(file))).to eq sep
+      describe "detects" do
+        let(:sep) { SEPARATORS.select{|s,v| file.match /_#{s}[._]/}.first.last }
+
+        it "'#{file}' correctly" do
+          expect(ACSV::Detect.separator(File.new(file))).to eq sep
+        end
       end
     end
 

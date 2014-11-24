@@ -11,8 +11,12 @@ module ACSV
         'uchardet'
       end
 
+      def self.present?
+        defined? ::ICU::UCharSetDetector
+      end
+
       def self.encoding(data, options)
-        if defined? ::ICU::UCharsetDetector
+        if present?
           encdet = ::ICU::UCharsetDetector.detect(data)
           encdet[:encoding] if encdet[:confidence] > options[:confidence]
         end

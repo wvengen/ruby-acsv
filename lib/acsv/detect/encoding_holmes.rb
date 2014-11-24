@@ -11,8 +11,12 @@ module ACSV
         'charlock_holmes'
       end
 
+      def self.present?
+        defined? ::CharlockHolmes::EncodingDetector
+      end
+
       def self.encoding(data, options)
-        if defined? ::CharlockHolmes::EncodingDetector
+        if present?
           encdet = ::CharlockHolmes::EncodingDetector.detect(data)
           encdet[:encoding] if encdet[:confidence] > options[:confidence]
         end

@@ -11,8 +11,12 @@ module ACSV
         'rchardet'
       end
 
+      def self.present?
+        defined? ::CharDet
+      end
+
       def self.encoding(data, options)
-        if defined? ::CharDet
+        if present?
           encdet = ::CharDet.detect(data)
           encdet["encoding"] if encdet["confidence"] > options[:confidence]
         end
