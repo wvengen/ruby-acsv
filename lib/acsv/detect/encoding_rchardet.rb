@@ -1,3 +1,8 @@
+begin
+  require 'rchardet'
+rescue LoadError
+end
+
 module ACSV
   module Detect
     module EncodingRChardet
@@ -7,9 +12,10 @@ module ACSV
       end
 
       def self.encoding(data, options)
-        require 'rchardet'
-        encdet = ::CharDet.detect(data)
-        encdet["encoding"] if encdet["confidence"] > options[:confidence]
+        if defined? ::CharDet
+          encdet = ::CharDet.detect(data)
+          encdet["encoding"] if encdet["confidence"] > options[:confidence]
+        end
       end
 
     end

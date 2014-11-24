@@ -1,3 +1,8 @@
+begin
+  require 'charlock_holmes'
+rescue LoadError
+end
+
 module ACSV
   module Detect
     module EncodingHolmes
@@ -7,9 +12,10 @@ module ACSV
       end
 
       def self.encoding(data, options)
-        require 'charlock_holmes'
-        encdet = ::CharlockHolmes::EncodingDetector.detect(data)
-        encdet[:encoding] if encdet[:confidence] > options[:confidence]
+        if defined? ::CharlockHolmes::EncodingDetector
+          encdet = ::CharlockHolmes::EncodingDetector.detect(data)
+          encdet[:encoding] if encdet[:confidence] > options[:confidence]
+        end
       end
 
     end
