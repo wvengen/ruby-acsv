@@ -16,4 +16,8 @@ Most are constructured for this gem, but there are some CSV files found in the w
 * `extern_lbdteams` [Lahman's Baseball Database](http://www.seanlahman.com/baseball-archive/statistics/) (Teams.csv, 2014-02-14), [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
 * `extern_hypertable` [Hypertable sample](https://code.google.com/p/hypertable/downloads/detail?name=access.tsv.gz) (access.tsv.gz), [GPLv3](http://www.gnu.org/licenses/gpl.html)
 * `extern_flamenco` [Flamenco example](http://flamenco.berkeley.edu/) (items.csv), [BSD](http://flamenco.berkeley.edu/license.html)
+* `extern_formatguesser` [csv-format-guesser](http://rubygems.org/gems/csv-format-guesser) (spec/fixtures/files/), [MIT](http://opensource.org/licenses/MIT)
 
+Some files are prefixed with `skip_` because they are not supported by this
+gem. One contains a trailing newline, another has an utf-8 character around
+byte position 81290, which is beyond the character detection reading point.

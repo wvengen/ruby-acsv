@@ -7,15 +7,17 @@ describe ACSV::Detect do
       :comma => ",",
       :semicolon => ";",
       :tab => "\t",
-      :pipe => "|"
+      :pipe => "|",
+      :hash => "#"
     }
 
     Dir.glob('spec/files/{test,extern}_*') do |file|
       describe "detects" do
+        let(:enc) { encodings_for_testfile(file).first }
         let(:sep) { SEPARATORS.select{|s,v| file.match /_#{s}[._]/}.first.last }
 
         it "'#{file}' correctly" do
-          expect(ACSV::Detect.separator(File.new(file))).to eq sep
+          expect(ACSV::Detect.separator(File.new(file, "rb:#{enc}")).encode('ascii')).to eq sep
         end
       end
     end

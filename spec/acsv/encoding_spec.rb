@@ -3,18 +3,12 @@ require_relative '../spec_helper'
 describe ACSV::Detect do
   describe 'encoding' do
 
-    ENCODINGS = {
-      ascii:   %w(ascii ISO-8859-1 ISO-8859-2),
-      utf8:    %w(utf-8 UTF-8),
-      iso8859: %w(ISO-8859-1 ISO-8859-2)
-    }
-
     ACSV::Detect.encoding_methods.each do |method|
       describe "using #{method}" do
 
         Dir.glob('spec/files/{test,extern}_*') do |file|
           describe 'detects' do
-            let(:enc) { ENCODINGS.select{|s,v| file.match /_#{s}[._]/}.first.last }
+            let(:enc) { encodings_for_testfile file, method }
 
             it "'#{file}' correctly" do
               expect(enc).to include ACSV::Detect.encoding(File.new(file), method: method)
