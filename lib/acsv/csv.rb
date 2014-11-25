@@ -7,7 +7,7 @@ module ACSV
   #
   # Please note that non-rewindable IO objects, like STDIN, are not supported.
   #
-  # @see ::CSV
+  # @see http://www.ruby-doc.org/stdlib/libdoc/csv/rdoc/CSV.html
   class CSV < ::CSV
     # This constructor will wrap either a String or IO object passed in data for reading and/or writing.
     # Detection of encoding happens on IO objects only.
@@ -16,7 +16,7 @@ module ACSV
     # the +internal_encoding+ option to +nil+
     #
     # @option options [String] :internal_encoding encoding to return strings as (default +utf-8+)
-    # @see ::CSV#new
+    # @see http://www.ruby-doc.org/stdlib/libdoc/csv/rdoc/CSV.html#method-c-new
     def initialize(data, options = Hash.new)
       if data.is_a? File
         internal_encoding = options.delete(:internal_encoding) { 'utf-8' }
