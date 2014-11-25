@@ -16,7 +16,7 @@ module ACSV
       end
       separators = SEPARATORS.map{|s| s.encode(firstline.encoding)}
       sep = separators.map {|x| [firstline.count(x),x]}.sort_by {|x| x[0]}.last
-      sep[0] == 0 ? nil : sep[1]
+      sep[0] == 0 ? nil : sep[1].encode('ascii')
     end
 
   end

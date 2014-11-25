@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 describe ACSV::Detect do
   describe 'encoding' do
 
-    ACSV::Detect.encoding_methods.each do |method|
+    ACSV::Detect.encoding_methods_all.each do |method|
       describe "using #{method}" do
 
         Dir.glob('spec/files/{test,extern}_*') do |file|
@@ -14,6 +14,10 @@ describe ACSV::Detect do
               expect(enc).to include ACSV::Detect.encoding(File.new(file), method: method)
             end
           end
+        end
+
+        it "is included in available methods" do
+          expect(ACSV::Detect.encoding_methods).to include method
         end
 
       end

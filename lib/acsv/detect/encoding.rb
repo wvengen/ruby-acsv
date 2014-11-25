@@ -11,7 +11,8 @@ module ACSV
       # Number of bytes to test encoding on
       PREVIEW_BYTES = 8 * 4096
 
-      ENCODING_DETECTORS = [ EncodingHolmes, EncodingRChardet, EncodingUChardet ].select(&:present?)
+      ENCODING_DETECTORS_ALL = [ EncodingHolmes, EncodingRChardet, EncodingUChardet ]
+      ENCODING_DETECTORS_AVAIL = ENCODING_DETECTORS_ALL.select(&:present?)
 
       # Tries to detect the file encoding.
       #
@@ -39,7 +40,12 @@ module ACSV
 
       # @return [Array<String>] List of available methods for encoding
       def encoding_methods
-        ENCODING_DETECTORS.map(&:require_name)
+        ENCODING_DETECTORS_AVAIL.map(&:require_name)
+      end
+
+      # @return [Array<String>] List of possible methods for encoding (even if its gem is missing)
+      def encoding_methods_all
+        ENCODING_DETECTORS_ALL.map(&:require_name)
       end
 
       protected
@@ -48,10 +54,10 @@ module ACSV
       # @option options [Boolean] :method Only try this method, instead of trying all
       def detector_do(options)
         if options[:method]
-          detector = ENCODING_DETECTORS.select{|d| d.require_name == options[:method]}.first
+          detector = ENCODING_DETECTORS_AVAIL.select{|d| d.require_name == options[:method]}.first
           yield detector
         else
-          ENCODING_DETECTORS.each do |detector|
+          ENCODING_DETECTORS_AVAIL.each do |detector|
             yield detector if detector.present?
           end
         end

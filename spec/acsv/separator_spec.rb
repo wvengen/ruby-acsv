@@ -17,7 +17,7 @@ describe ACSV::Detect do
         let(:sep) { SEPARATORS.select{|s,v| file.match /_#{s}[._]/}.first.last }
 
         it "'#{file}' correctly" do
-          expect(ACSV::Detect.separator(File.new(file, "rb:#{enc}")).encode('ascii')).to eq sep
+          expect(ACSV::Detect.separator(File.new(file, "rb:#{enc}"))).to eq sep
         end
       end
     end

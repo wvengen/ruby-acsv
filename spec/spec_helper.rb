@@ -13,7 +13,7 @@ def encodings_for_testfile(filename, method=nil)
     utf16:     %w(UTF-16LE),
     ascii:     %w(ascii)
   }
-  if method == 'charlock_holmes'
+  if method == 'charlock_holmes' || method == 'uchardet'
     encodings.delete(:iso8859_7)
     encodings[:iso8859] = %w(ISO-8859-1 ISO-8859-2 ISO-8859-7)
     encodings[:ascii]   = %w(ISO-8859-1 ISO-8859-2 UTF-8)

@@ -12,7 +12,7 @@ module ACSV
       end
 
       def self.present?
-        defined? ::ICU::UCharSetDetector
+        defined? ::ICU::UCharsetDetector
       end
 
       def self.encoding(data, options)
