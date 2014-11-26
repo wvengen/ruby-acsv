@@ -7,6 +7,8 @@ module ACSV
   module Detect
     module EncodingRChardet
 
+      DEFAULT_CONFIDENCE = 0.2
+
       def self.require_name
         'rchardet'
       end
@@ -18,7 +20,7 @@ module ACSV
       def self.encoding(data, options)
         if present?
           encdet = ::CharDet.detect(data)
-          encdet["encoding"] if encdet["confidence"] > options[:confidence]
+          encdet["encoding"] if encdet["confidence"] > (options[:confidence] || DEFAULT_CONFIDENCE)
         end
       end
 

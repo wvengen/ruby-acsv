@@ -7,6 +7,8 @@ module ACSV
   module Detect
     module EncodingHolmes
 
+      DEFAULT_CONFIDENCE = 0.01
+
       def self.require_name
         'charlock_holmes'
       end
@@ -18,7 +20,7 @@ module ACSV
       def self.encoding(data, options)
         if present?
           encdet = ::CharlockHolmes::EncodingDetector.detect(data)
-          encdet[:encoding] if encdet[:confidence] > options[:confidence]
+          encdet[:encoding] if encdet[:confidence] > (options[:confidence] || DEFAULT_CONFIDENCE)*100
         end
       end
 

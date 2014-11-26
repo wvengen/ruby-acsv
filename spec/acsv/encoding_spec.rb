@@ -13,6 +13,10 @@ describe ACSV::Detect do
             it "'#{file}' correctly" do
               expect(enc).to include ACSV::Detect.encoding(File.new(file), method: method)
             end
+
+            it "does not detect with >1 confidence" do
+              expect(ACSV::Detect.encoding(File.new(file), method: method, confidence: 1.1)).to be nil
+            end
           end
         end
 

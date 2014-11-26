@@ -51,4 +51,15 @@ describe ACSV::CSV do
     end
   end
 
+  it 'really knows different methods' do
+    data = ACSV::CSV.read('spec/files/test_01_semicolon_ascii.csv', method: 'charlock_holmes')
+    expect(data.first.map{|e| e.encoding.to_s}.compact.uniq).to eq ['ISO-8859-2']
+    data = ACSV::CSV.read('spec/files/test_01_semicolon_ascii.csv', method: 'rchardet')
+    expect(data.first.map{|e| e.encoding.to_s}.compact.uniq).to eq ['US-ASCII']
+  end
+
+  it "doesn't break on unrecognised encodings" do
+    ACSV::CSV.read('spec/files/test_01_comma_ascii.csv', confidence: 1.1)
+  end
+
 end

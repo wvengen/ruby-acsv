@@ -21,8 +21,6 @@ module ACSV
       # @option options [String] :method try only specific method, one of {encoding_methods}
       # @return [String] most probable encoding
       def encoding(file_or_data, options={})
-        options = options_with_default(options)
-
         if file_or_data.is_a? File
           position = file_or_data.tell
           data = file_or_data.read(PREVIEW_BYTES)
@@ -36,6 +34,7 @@ module ACSV
             return enc
           end
         end
+        nil
       end
 
       # @return [Array<String>] List of available methods for encoding
@@ -61,13 +60,6 @@ module ACSV
             yield detector if detector.present?
           end
         end
-      end
-
-      # Merge default options with those supplied
-      # @param options [Hash] supplied options
-      # @return [Hash<Symbol, Object>] Options with defaults
-      def options_with_default(options)
-        {confidence: CONFIDENCE}.merge options
       end
 
     end
