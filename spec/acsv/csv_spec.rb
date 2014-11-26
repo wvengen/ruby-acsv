@@ -24,14 +24,31 @@ describe ACSV::CSV do
     end
   end
 
-  it "returns specific encoding when asked for" do
-    data = ACSV::CSV.read('spec/files/test_01_comma_ascii.csv', 'r::ISO-8859-15')
-    expect(data.first.map{|e| e.encoding.to_s}.compact.uniq).to eq ['ISO-8859-15']
-  end
-
   it "returns file encoding by default" do
     data = ACSV::CSV.read('spec/files/test_02_semicolon_utf16.csv')
     expect(data.first.map{|e| e.encoding.to_s}.compact.uniq).to eq ['UTF-16LE']
+  end
+
+  describe 'returns requested encoding' do
+    it "from mode" do
+      data = ACSV::CSV.read('spec/files/test_01_comma_ascii.csv', 'r::ISO-8859-15')
+      expect(data.first.map{|e| e.encoding.to_s}.compact.uniq).to eq ['ISO-8859-15']
+    end
+
+    it "from encoding option" do
+      data = ACSV::CSV.read('spec/files/test_01_comma_ascii.csv', encoding: 'ISO-8859-15')
+      expect(data.first.map{|e| e.encoding.to_s}.compact.uniq).to eq ['ISO-8859-15']
+    end
+
+    it "from internal_encoding option with external_encoding" do
+      data = ACSV::CSV.read('spec/files/test_02_semicolon_utf16.csv', external_encoding: 'UTF-16LE', internal_encoding: 'UTF-32BE')
+      expect(data.first.map{|e| e.encoding.to_s}.compact.uniq).to eq ['UTF-32BE']
+    end
+
+    it "from just the internal_encoding option" do
+      data = ACSV::CSV.read('spec/files/test_01_comma_ascii.csv', internal_encoding: 'UTF-16LE')
+      expect(data.first.map{|e| e.encoding.to_s}.compact.uniq).to eq ['UTF-16LE']
+    end
   end
 
 end
