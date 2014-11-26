@@ -12,7 +12,6 @@ module ACSV
     # This constructor will wrap either a String or IO object passed in data for reading and/or writing.
     # In case of reading, the character separator is auto-detected (unless given as an option).
     #
-    # @option options [String] :internal_encoding encoding to return strings as (default +utf-8+)
     # @see http://www.ruby-doc.org/stdlib/libdoc/csv/rdoc/CSV.html#method-c-new
     def initialize(data, options = Hash.new)
       options[:col_sep] ||= ACSV::Detect.separator(data)
@@ -28,8 +27,8 @@ module ACSV
     #
     # When auto-detection fails, the default encoding as used by CSV and IO is taken.
     #
-    # @option options [Number] :confidence minimum confidence level (0-1)
-    # @option options [String] :method try only specific method, one of {ACSV::Detect.encoding_methods}
+    # @option args [Number] :confidence minimum confidence level (0-1)
+    # @option args [String] :method try only specific method, one of {ACSV::Detect.encoding_methods}
     # @see ACSV::Detect.encoding
     # @see http://www.ruby-doc.org/stdlib/libdoc/csv/rdoc/CSV.html#method-c-open
     def self.open(*args)

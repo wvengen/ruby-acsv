@@ -1,6 +1,7 @@
 module ACSV
   module Detect
 
+    # Possible CSV separators to check
     SEPARATORS = [",", ";", "\t", "|", "#"]
 
     # @param file_or_data [File, String] CSV file or data to probe

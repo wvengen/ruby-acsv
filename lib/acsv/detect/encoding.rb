@@ -11,9 +11,6 @@ module ACSV
       # Number of bytes to test encoding on
       PREVIEW_BYTES = 8 * 4096
 
-      ENCODING_DETECTORS_ALL = [ EncodingHolmes, EncodingRChardet, EncodingUChardet ]
-      ENCODING_DETECTORS_AVAIL = ENCODING_DETECTORS_ALL.select(&:present?)
-
       # Tries to detect the file encoding.
       #
       # @param file_or_data [File, String] CSV file or data to probe
@@ -48,6 +45,9 @@ module ACSV
       end
 
       protected
+
+      ENCODING_DETECTORS_ALL = [ EncodingHolmes, EncodingRChardet, EncodingUChardet ]
+      ENCODING_DETECTORS_AVAIL = ENCODING_DETECTORS_ALL.select(&:present?)
 
       # Run supplied block on detectors
       # @option options [Boolean] :method Only try this method, instead of trying all
