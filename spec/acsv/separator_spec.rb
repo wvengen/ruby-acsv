@@ -22,5 +22,8 @@ describe ACSV::Detect do
       end
     end
 
+    it 'handles empty string' do
+      expect(ACSV::Detect.separator('')).to be_nil
+    end
   end
 end

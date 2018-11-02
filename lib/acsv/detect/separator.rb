@@ -13,8 +13,11 @@ module ACSV
         firstline = file_or_data.readline
         file_or_data.seek(position)
       else
+        return nil if file_or_data.empty?
+
         firstline = file_or_data.split("\n", 2)[0]
       end
+
       separators = SEPARATORS.map{|s| s.encode(firstline.encoding)}
       sep = separators.map {|x| [firstline.count(x),x]}.sort_by {|x| x[0]}.last
       sep[0] == 0 ? nil : sep[1].encode('ascii')
