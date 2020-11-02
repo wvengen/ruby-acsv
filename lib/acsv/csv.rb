@@ -14,7 +14,10 @@ module ACSV
     #
     # @see http://www.ruby-doc.org/stdlib/libdoc/csv/rdoc/CSV.html#method-c-new
     def initialize(data, options = Hash.new)
-      options[:col_sep] ||= ACSV::Detect.separator(data)
+      if !options.key?(:col_sep) && (separator = ACSV::Detect.separator(data))
+        options[:col_sep] = separator
+      end
+
       super(data, options)
     end
 
