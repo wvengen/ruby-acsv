@@ -15,7 +15,7 @@ module ACSV
     # @see http://www.ruby-doc.org/stdlib/libdoc/csv/rdoc/CSV.html#method-c-new
     def initialize(data, options = Hash.new)
       options[:col_sep] ||= ACSV::Detect.separator(data)
-      super(data, options)
+      super(data, **options)
     end
 
     # This method opens an IO object, and wraps that with CSV. For reading, separator
