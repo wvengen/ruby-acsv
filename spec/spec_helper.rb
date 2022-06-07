@@ -1,5 +1,5 @@
 require 'bundler/setup'
-require 'acsv'
+require 'acsv-p'
 
 
 # Return possible valid encodings for a test file

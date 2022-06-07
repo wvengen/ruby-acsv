@@ -21,14 +21,14 @@ Run
 
 ```sh
 gem install rchardet
-gem install acsv
+gem install acsv-p
 ```
 
 or, when using Ruby on Rails, put this in your Gemfile
 
 ```ruby
 gem 'rchardet'
-gem 'acsv'
+gem 'acsv-p'
 ```
 
 and run `bundle install`.
@@ -44,7 +44,7 @@ use `ACSV::CSV` wherever you would have used `CSV`.
 For example:
 ```ruby
 require 'rchardet'
-require 'acsv'
+require 'acsv-p'
 
 ACSV::CSV.foreach("spec/files/test_02_semicolon_utf16.csv", headers: true) do |row|
   puts row[1] # => '1234'
@@ -81,7 +81,7 @@ This gem also provides some lower-level methods for encoding and separator detec
 
 ```ruby
 require 'rchardet'
-require 'acsv'
+require 'acsv-p'
 
 data = File.read("spec/files/test_02_semicolon_iso8859.csv")
 encoding = ACSV::Detect.encoding(data)
