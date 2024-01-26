@@ -14,6 +14,8 @@ Gem::Specification.new do |s|
 
   s.files       = Dir["lib/**/*"]
 
+  s.add_dependency 'csv'
+
   # test with different character detection libraries
   s.add_development_dependency 'rake'
   s.add_development_dependency 'rspec'
